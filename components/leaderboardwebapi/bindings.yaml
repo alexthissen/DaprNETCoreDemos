@@ -1,0 +1,12 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: signalr
+  namespace: default
+spec:
+  type: bindings.azure.signalr
+  metadata:
+  - name: connectionString
+    value: Endpoint=<your-endpoint>
+  - name: hub  # Optional
+    value: leaderboardhub

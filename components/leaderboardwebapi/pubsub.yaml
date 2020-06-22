@@ -1,0 +1,13 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: messagebus
+spec:
+  type: pubsub.azure.servicebus
+  metadata:
+  - name: connectionString
+    value: Endpoint=<your-endpoint>
+  - name: timeoutInSec
+    value: "60" # Optional. Default: "60".
+  - name: disableEntityManagement
+    value: false

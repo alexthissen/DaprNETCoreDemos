@@ -1,0 +1,138 @@
+version: '3.4'
+
+services:
+  leaderboardwebapi:
+    image: ${DOCKER_REGISTRY-}leaderboardwebapi
+    build:
+      context: .
+      dockerfile: LeaderboardWebAPI/Dockerfile
+    ports:
+      - "5100:80"
+      - "50002:50002"
+    environment:
+      - DAPR_GRPC_PORT=50002
+    depends_on:
+      - redis
+      - placement
+    networks:
+      - leaderboard-dapr
+  leaderboardwebapi-dapr:
+    image: "daprio/daprd:0.8.0"
+    command: ["./daprd",
+     "-app-id", "leaderboardwebapi",
+     "-app-port", "80",
+     "-metrics-port", "9091",
+     "-log-level", "debug",
+     "-config", "components/config.yaml",
+     "-placement-address", "placement:50006",
+     "-dapr-grpc-port", "50002",
+     "-components-path", "/components"]
+    volumes:
+        - "./components/leaderboardwebapi:/components"
+        - "./certificates/:/certificates"
+    depends_on:
+      - leaderboardwebapi
+    network_mode: "service:leaderboardwebapi"
+
+  placement:
+    image: "daprio/dapr:0.8.0"
+    command: ["./placement", "-port", "50006"]
+    ports:
+      - "50006:50006"
+    networks:
+      - leaderboard-dapr
+
+  zipkin: 
+    image: "openzipkin/zipkin"
+    ports:
+    - "9412:9411"
+    networks:
+      - leaderboard-dapr
+  
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml' 
+      - '--web.listen-address=:8081'
+#      - '--net=host'
+    ports:
+      - "8081:8081"
+    networks:
+      - leaderboard-dapr
+
+  grafana:
+    image: grafana/grafana
+    volumes:
+      - type: volume
+        source: grafana-storage
+        target: /var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=pass
+      - GF_SMTP_HOST=localhost:25
+      - GF_SMTP_ENABLED=true
+      - GF_SMTP_FROM_ADDRESS=alert@retrogamingwebapi.com
+      - GF_SMTP_SKIP_VERIFY=true
+    depends_on:
+      - prometheus
+    ports:
+      - "3000:3000"
+    networks:
+      - leaderboard-dapr
+
+  ai-forwarder:
+    image: "daprio/dapr-localforwarder:latest"
+    environment:
+    - APPINSIGHTS_INSTRUMENTATIONKEY=<your-instrumentation-key>
+    - APPINSIGHTS_LIVEMETRICSSTREAMAUTHENTICATIONAPIKEY=<your-api-key>
+    ports:
+    - "55678:55678"
+    networks:
+    - leaderboard-dapr
+
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6380:6379"
+    networks:
+      - leaderboard-dapr
+
+  twittermonitor:
+    image: ${DOCKER_REGISTRY-}twittermonitor
+    build:
+      context: .
+      dockerfile: TwitterMonitor/Dockerfile
+    ports:
+      - "5200:80"
+      - "50003:50003"
+    environment:
+      - DAPR_GRPC_PORT=50003
+    depends_on:
+      - redis
+      - placement
+    networks:
+      - leaderboard-dapr
+  twittermonitor-dapr:
+    image: "daprio/daprd:0.8.0"
+    command: ["./daprd",
+     "-app-id", "twittermonitor",
+     "-app-port", "80",
+     "-metrics-port", "9092",
+     "-log-level", "info",
+     "-config", "components/config.yaml",
+     "-placement-address", "placement:50006",
+     "-dapr-grpc-port", "50003",
+     "-components-path", "/components"]
+    volumes:
+        - "./components/twittermonitor:/components"
+        - "./certificates/:/certificates"
+    depends_on:
+      - twittermonitor
+    network_mode: "service:twittermonitor"
+
+networks:
+  leaderboard-dapr:
+
+volumes:
+  grafana-storage:

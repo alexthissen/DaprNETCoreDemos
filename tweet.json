@@ -1,0 +1,171 @@
+{
+  "coordinates": null,
+  "created_at": "Wed Jun 03 20:23:59 +0000 2020",
+  "current_user_retweet": null,
+  "entities": {
+    "hashtags": [
+      {
+        "indices": [ 10, 15 ],
+        "text": "data"
+      },
+      {
+        "indices": [ 75, 83 ],
+        "text": "PowerBI"
+      }
+    ],
+    "media": null,
+    "urls": [
+      {
+        "indices": [ 116, 139 ],
+        "display_url": "twitter.com/i/web/status/1.",
+        "expanded_url": "https://twitter.com/i/web/status/1268277272798212096",
+        "url": "https://t.co/2XqIFctzuq"
+      }
+    ],
+    "user_mentions": []
+  },
+  "favorite_count": 0,
+  "favorited": false,
+  "filter_level": "low",
+  "id": 1268277272798212096,
+  "id_str": "1268277272798212096",
+  "in_reply_to_screen_name": "",
+  "in_reply_to_status_id": 0,
+  "in_reply_to_status_id_str": "",
+  "in_reply_to_user_id": 0,
+  "in_reply_to_user_id_str": "",
+  "lang": "en",
+  "possibly_sensitive": false,
+  "quote_count": 0,
+  "reply_count": 0,
+  "retweet_count": 0,
+  "retweeted": false,
+  "retweeted_status": null,
+  "source": "\u003ca href=\"https://mobile.twitter.com\" rel=\"nofollow\"\u003eTwitter Web App\u003c/a\u003e",
+  "scopes": null,
+  "text": "Take your #data and visualization skills to the next level in this no-cost #PowerBI Data Visualization Workshop on. https://t.co/2XqIFctzuq",
+  "full_text": "",
+  "display_text_range": [ 0, 140 ],
+  "place": null,
+  "truncated": true,
+  "user": {
+    "contributors_enabled": false,
+    "created_at": "Fri Apr 24 18:37:48 +0000 2009",
+    "default_profile": false,
+    "default_profile_image": false,
+    "description": "CCG helps organizations become more insights-driven, solve complex challenges and accelerate growth through industry-specific data and analytics solutions.",
+    "email": "",
+    "entities": null,
+    "favourites_count": 2125,
+    "follow_request_sent": false,
+    "following": false,
+    "followers_count": 1039,
+    "friends_count": 986,
+    "geo_enabled": true,
+    "id": 35000778,
+    "id_str": "35000778",
+    "is_translator": false,
+    "lang": "",
+    "listed_count": 83,
+    "location": "",
+    "name": "CCG",
+    "notifications": false,
+    "profile_background_color": "F0F0F0",
+    "profile_background_image_url": "http://abs.twimg.com/images/themes/theme1/bg.png",
+    "profile_background_image_url_https": "https://abs.twimg.com/images/themes/theme1/bg.png",
+    "profile_background_tile": true,
+    "profile_banner_url": "https://pbs.twimg.com/profile_banners/35000778/1590184474",
+    "profile_image_url": "http://pbs.twimg.com/profile_images/969574771351478273/2i7fO7Rg_normal.jpg",
+    "profile_image_url_https": "https://pbs.twimg.com/profile_images/969574771351478273/2i7fO7Rg_normal.jpg",
+    "profile_link_color": "8F7823",
+    "profile_sidebar_border_color": "FFFFFF",
+    "profile_sidebar_fill_color": "F1F0E9",
+    "profile_text_color": "504F4F",
+    "profile_use_background_image": true,
+    "protected": false,
+    "screen_name": "ccganalytics",
+    "show_all_inline_media": false,
+    "status": null,
+    "statuses_count": 3320,
+    "time_zone": "",
+    "url": "http://www.ccganalytics.com",
+    "utc_offset": 0,
+    "verified": false,
+    "withheld_in_countries": null,
+    "withheld_scope": ""
+  },
+  "withheld_copyright": false,
+  "withheld_in_countries": null,
+  "withheld_scope": "",
+  "extended_entities": null,
+  "extended_tweet": {
+    "full_text": "Take your #data and visualization skills to the next level in this no-cost #PowerBI Data Visualization Workshop on June 9th!\n\nSave your seat today: https://t.co/m9FaRdMZJZ\n\n@Microsoft @MSPowerBI  #datavisualization #analytics #Microsoft https://t.co/U7AJv34pAc",
+    "display_text_range": [ 0, 236 ],
+    "entities": {
+      "hashtags": [
+        {
+          "indices": [ 10, 15 ],
+          "text": "data"
+        },
+        {
+          "indices": [ 75, 83 ],
+          "text": "PowerBI"
+        },
+        {
+          "indices": [ 196, 214 ],
+          "text": "datavisualization"
+        },
+        {
+          "indices": [ 215, 225 ],
+          "text": "analytics"
+        },
+        {
+          "indices": [ 226, 236 ],
+          "text": "Microsoft"
+        }
+      ],
+      "media": [
+        {
+          "indices": [ 237, 260 ],
+          "display_url": "pic.twitter.com/U7AJv34pAc",
+          "expanded_url": "https://twitter.com/ccganalytics/status/1268277272798212096/photo/1",
+          "url": "https://t.co/U7AJv34pAc",
+          "id": 1268277092355096577,
+          "id_str": "1268277092355096577",
+          "media_url": "http://pbs.twimg.com/media/EZnTS76XQAEJpae.jpg",
+          "media_url_https": "https://pbs.twimg.com/media/EZnTS76XQAEJpae.jpg",
+          "source_status_id": 0,
+          "source_status_id_str": "",
+          "type": "photo",
+          "sizes": {
+            "thumb": {
+              "w": 150,
+              "h": 150,
+              "resize": "crop"
+            },
+            "large": {
+              "w": 800,
+              "h": 385,
+              "resize": "fit"
+            },
+            "medium": {
+              "w": 800,
+              "h": 385,
+              "resize": "fit"
+            },
+            "small": {
+              "w": 680,
+              "h": 327,
+              "resize": "fit"
+            }
+          },
+          "video_info": {
+            "aspect_ratio": [ 0, 0 ],
+            "duration_millis": 0,
+            "variants": null
+          }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,193 @@
+﻿<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1,minimal-ui" name="viewport">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Material+Icons">
+    <link rel="stylesheet" href="https://unpkg.com/vue-material/dist/vue-material.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/vue-material/dist/theme/default.css">
+
+    <script src="https://unpkg.com/vue"></script>
+    <script src="https://unpkg.com/vue-material"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.3/signalr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
+
+    <style>
+        .positionoffset {
+            color: #888;
+        }
+        .increase {
+            transition: background-color 1000ms linear;
+            background-color: #ffd800;
+        }
+        .risen {
+            transition: background-color 1000ms linear;
+            background-color: #d5e5d7;
+        }
+        .fallen {
+            transition: background-color 1000ms linear;
+            background-color: #ffefea;
+        }
+        .list-complete-item {
+            transition: all 1s;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .list-complete-enter {
+            opacity: 0;
+            transform: translateY(300px);
+        }
+        .list-complete-leave-to {
+            opacity: 0;
+            transform: translateX(200px);
+        }
+        .list-complete-leave-active {
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+
+        <div class="page-container">
+            <md-app md-waterfall md-mode="overlap">
+                <md-app-toolbar class="md-primary md-large">
+                    <div class="md-toolbar-row">
+                        <span class="md-title">Twitter Leaderboard Most Mentioned in #dapr</span>
+                    </div>
+                </md-app-toolbar>
+
+                <md-app-content>
+                    <transition-group name="list-complete" tag="md-list">
+                        <div v-for="toptweeter in toptweeters" class="list-complete-item" v-bind:key="toptweeter.name">
+                            <md-list-item v-bind:class="{ risen: isRisen(toptweeter), fallen: isFallen(toptweeter), increase: isIncrease(toptweeter)}">
+
+                                <div class="md-list-item-text">
+                                    <strong>{{ toptweeter.name }}</strong>
+                                    <span>@{{ toptweeter.screenName }}</span>
+                                </div>
+
+                                <span>
+                                    <span>
+                                        <span>{{ toptweeter.score }}</span>
+                                        <span v-if="countDifference(toptweeter) != 0">(+{{countDifference(toptweeter)}})</span>
+                                    </span>
+                                    <span v-if="positionOffset(toptweeter) != 0">
+                                        <md-icon v-if="isRisen(toptweeter)">arrow_upward</md-icon>
+                                        <md-icon v-if="isFallen(toptweeter)">arrow_downward</md-icon>
+                                        <span class="positionoffset">{{ positionOffset(toptweeter) }}</span>
+                                    </span>
+                            </md-list-item>
+                        </div>
+
+                    </transition-group>
+
+                    <md-snackbar :md-active.sync="showSnackbar" md-persistent>
+                        <span>The leaderboard has been updated!</span>
+                        <md-button class="md-primary" @click="showSnackbar = false">Close</md-button>
+                    </md-snackbar>
+                </md-app-content>
+            </md-app>
+        </div>
+    </div>
+
+    <script>
+        Vue.use(VueMaterial.default)
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                toptweeters: [],
+                previousTopTweeters: [],
+                showSnackbar: false,
+                top: 10,
+                lastHandled: new Date(),
+            },
+            methods: {
+                positionOffset: function (toptweeter) {
+                    if (this.previousTopTweeters.length == 0) {
+                        return 0;
+                    }
+
+                    var indexPrevious = this.previousTopTweeters.findIndex(x => x.id === toptweeter.id);
+                    var indexCurrent = this.toptweeters.findIndex(x => x.id === toptweeter.id);
+
+                    if (indexPrevious === -1) {
+                        indexPrevious = this.top;
+                    }
+
+                    return indexPrevious - indexCurrent;
+                },
+                countDifference: function (toptweeter) {
+                    var previous = this.previousTopTweeters.find(x => x.id === toptweeter.id);
+                    var current = this.toptweeters.find(x => x.id === toptweeter.id);
+
+                    if (previous === undefined) {
+                        return 0;
+                    }
+
+                    return current.score - previous.score;
+
+                },
+                isIncrease(toptweeter) {
+                    return (this.positionOffset(toptweeter) == 0) && (this.countDifference(toptweeter) > 0);
+                },
+                isRisen(toptweeter) {
+                    return this.positionOffset(toptweeter) > 0;
+                },
+                isFallen(toptweeter) {
+                    return this.positionOffset(toptweeter) < 0;
+                },
+                leaderboardUpdated() {
+                    var currentDate = new Date();
+                    var dif = currentDate.getTime() - this.lastHandled.getTime();
+                    var secondsBetween = dif / 1000;
+                    if (secondsBetween < 5) {
+                        return;
+                    }
+                    this.getLeaderboard();
+                    this.showSnackbar = true;
+                    this.lastHandled = new Date();
+                },
+                getLeaderboard() {
+                    axios
+                        .get('http://localhost:5100/mostmentioned/dapr?top=' + this.top)
+                        .then(response => {
+                            this.previousTopTweeters = this.toptweeters;
+                            this.toptweeters = response.data;
+                        })
+                }
+            },
+
+            mounted() {
+                this.getLeaderboard();
+            }
+        })
+
+        function bindConnectionMessage(connection) {
+            var leaderboardUpdatedCallback = function () {
+                console.log('leaderboardUpdated callback received');
+                app.leaderboardUpdated();
+            };
+            // Create a function that the hub can call to broadcast messages.
+            connection.on('leaderboardUpdated', leaderboardUpdatedCallback);
+        }
+
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/leaderboard")
+            .configureLogging(signalR.LogLevel.Information)
+            .build();
+
+        bindConnectionMessage(connection);
+        connection.start()
+            .then(function () {
+                console.log("connected");
+            })
+            .catch(function (error) {
+                console.error(error.message);
+            });
+
+    </script>
+</body>
+</html>

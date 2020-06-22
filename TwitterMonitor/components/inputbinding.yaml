@@ -1,0 +1,17 @@
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: tweets
+spec:
+  type: bindings.twitter
+  metadata:
+  - name: consumerKey
+    value: "<your-consumer-key>"
+  - name: consumerSecret
+    value: "<your-consumer-secret>"
+  - name: accessToken
+    value: "<your-access-token>"
+  - name: accessSecret
+    value: "<your-access-secret>"
+  - name: query
+    value: "#microsoft" # for testing purposes: choose a popular twitter topic

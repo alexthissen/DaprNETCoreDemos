@@ -1,0 +1,80 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{F8EA248B-C47B-4E63-8046-316218F609F3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F82D7754-990C-42D3-9C52-8E422E2E0D0E}"
+	ProjectSection(SolutionItems) = preProject
+		dapr-sidecar-dashboard.json = dapr-sidecar-dashboard.json
+		dapr-system-services-dashboard.json = dapr-system-services-dashboard.json
+		localforwarder.config = localforwarder.config
+		prometheus.yml = prometheus.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "components", "components", "{1033E6DE-5583-4E5C-B675-FB8BA800459C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "alternatives", "alternatives", "{CB554F71-209F-47C8-BB52-181F23E3C377}"
+	ProjectSection(SolutionItems) = preProject
+		alternatives\appinsights.yaml = alternatives\appinsights.yaml
+		alternatives\azuretablestoragestatestore.yaml = alternatives\azuretablestoragestatestore.yaml
+		alternatives\redis-pubsub-scoped.yaml = alternatives\redis-pubsub-scoped.yaml
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TwitterMonitor", "TwitterMonitor\TwitterMonitor.csproj", "{CCE02B36-741F-4A67-A83C-22642AD43452}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "twittermonitor", "twittermonitor", "{3E6F85A0-9F72-4CA1-9EFF-2C0D98222D43}"
+	ProjectSection(SolutionItems) = preProject
+		components\twittermonitor\config.yaml = components\twittermonitor\config.yaml
+		components\twittermonitor\inputbindings.yaml = components\twittermonitor\inputbindings.yaml
+		components\twittermonitor\pubsub.yaml = components\twittermonitor\pubsub.yaml
+		components\twittermonitor\statestores.yaml = components\twittermonitor\statestores.yaml
+		components\twittermonitor\tracing.yaml = components\twittermonitor\tracing.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "leaderboardwebapi", "leaderboardwebapi", "{9A9748F6-334F-4864-A1DC-F4A82DBE2A08}"
+	ProjectSection(SolutionItems) = preProject
+		components\leaderboardwebapi\actors.yaml = components\leaderboardwebapi\actors.yaml
+		components\leaderboardwebapi\bindings.yaml = components\leaderboardwebapi\bindings.yaml
+		components\leaderboardwebapi\config.yaml = components\leaderboardwebapi\config.yaml
+		components\leaderboardwebapi\pubsub.yaml = components\leaderboardwebapi\pubsub.yaml
+		components\leaderboardwebapi\secretstores.yaml = components\leaderboardwebapi\secretstores.yaml
+		components\leaderboardwebapi\statestores.yaml = components\leaderboardwebapi\statestores.yaml
+		components\leaderboardwebapi\tracing.yaml = components\leaderboardwebapi\tracing.yaml
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeaderboardWebAPI", "LeaderboardWebAPI\LeaderboardWebAPI.csproj", "{7A1C1CE5-87B0-48E1-8C8F-69398D5B8D16}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F8EA248B-C47B-4E63-8046-316218F609F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8EA248B-C47B-4E63-8046-316218F609F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8EA248B-C47B-4E63-8046-316218F609F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8EA248B-C47B-4E63-8046-316218F609F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCE02B36-741F-4A67-A83C-22642AD43452}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCE02B36-741F-4A67-A83C-22642AD43452}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCE02B36-741F-4A67-A83C-22642AD43452}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCE02B36-741F-4A67-A83C-22642AD43452}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A1C1CE5-87B0-48E1-8C8F-69398D5B8D16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A1C1CE5-87B0-48E1-8C8F-69398D5B8D16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A1C1CE5-87B0-48E1-8C8F-69398D5B8D16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A1C1CE5-87B0-48E1-8C8F-69398D5B8D16}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1033E6DE-5583-4E5C-B675-FB8BA800459C} = {F82D7754-990C-42D3-9C52-8E422E2E0D0E}
+		{CB554F71-209F-47C8-BB52-181F23E3C377} = {F82D7754-990C-42D3-9C52-8E422E2E0D0E}
+		{3E6F85A0-9F72-4CA1-9EFF-2C0D98222D43} = {1033E6DE-5583-4E5C-B675-FB8BA800459C}
+		{9A9748F6-334F-4864-A1DC-F4A82DBE2A08} = {1033E6DE-5583-4E5C-B675-FB8BA800459C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3D24EB9C-36FE-4431-921C-2E04C75B6099}
+	EndGlobalSection
+EndGlobal

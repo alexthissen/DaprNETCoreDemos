@@ -1,0 +1,11 @@
+# prometheus.yml
+global:
+  scrape_interval: 15s
+  external_labels:
+    monitor: 'dapr-monitor'
+
+scrape_configs:
+  - job_name: 'dapr'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['leaderboardwebapi:9091']
