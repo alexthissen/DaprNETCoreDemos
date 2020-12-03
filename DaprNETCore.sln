@@ -35,12 +35,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "twittermonitor", "twittermo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "leaderboardwebapi", "leaderboardwebapi", "{9A9748F6-334F-4864-A1DC-F4A82DBE2A08}"
 	ProjectSection(SolutionItems) = preProject
-		components\leaderboardwebapi\actors.yaml = components\leaderboardwebapi\actors.yaml
 		components\leaderboardwebapi\bindings.yaml = components\leaderboardwebapi\bindings.yaml
 		components\leaderboardwebapi\config.yaml = components\leaderboardwebapi\config.yaml
 		components\leaderboardwebapi\pubsub.yaml = components\leaderboardwebapi\pubsub.yaml
 		components\leaderboardwebapi\secretstores.yaml = components\leaderboardwebapi\secretstores.yaml
-		components\leaderboardwebapi\statestores.yaml = components\leaderboardwebapi\statestores.yaml
+		components\leaderboardwebapi\statestore.yaml = components\leaderboardwebapi\statestore.yaml
 		components\leaderboardwebapi\tracing.yaml = components\leaderboardwebapi\tracing.yaml
 	EndProjectSection
 EndProject

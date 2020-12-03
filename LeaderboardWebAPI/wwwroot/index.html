@@ -54,7 +54,7 @@
             <md-app md-waterfall md-mode="overlap">
                 <md-app-toolbar class="md-primary md-large">
                     <div class="md-toolbar-row">
-                        <span class="md-title">Twitter Leaderboard Most Mentioned in #dapr</span>
+                        <span class="md-title">Twitter Leaderboard Most Mentioned in #microsoft</span>
                     </div>
                 </md-app-toolbar>
 
@@ -152,7 +152,7 @@
                 },
                 getLeaderboard() {
                     axios
-                        .get('http://localhost:5100/mostmentioned/dapr?top=' + this.top)
+                        .get('http://localhost:5100/mostmentioned/microsoft?top=' + this.top)
                         .then(response => {
                             this.previousTopTweeters = this.toptweeters;
                             this.toptweeters = response.data;

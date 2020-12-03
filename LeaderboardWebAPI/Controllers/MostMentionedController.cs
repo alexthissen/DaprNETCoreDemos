@@ -27,9 +27,11 @@ namespace LeaderboardWebAPI.Controllers
             this.hubContext = hubContext;
         }
 
-        [Topic("mentions")]
+        [Topic("messagebus", "mentions")]
         [HttpPost("mentions")]
-        public async Task<ActionResult> HandleMentions(TweetReceived message, [FromServices] DaprClient daprClient)
+        public async Task<ActionResult> HandleMentions(
+            TweetReceived message, 
+            [FromServices] DaprClient daprClient)
         {
             logger.LogInformation($"Twitter message from @{message.Tweet.user.screen_name}");
             await daprClient.SaveStateAsync(TweetStoreName, message.Tweet.id_str, message.Tweet);

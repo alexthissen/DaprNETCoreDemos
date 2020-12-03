@@ -59,7 +59,7 @@ namespace TwitterMonitor
                 logger.LogInformation($"[binding.twitter] Tweet {tweet.id} from '{tweet.user.screen_name}'");
 
                 string monitoredTag = Configuration["MonitoredTag"];
-                await daprClient.PublishEventAsync<TweetReceived>("mentions", 
+                await daprClient.PublishEventAsync<TweetReceived>("messagebus", "mentions", 
                     new TweetReceived { Tweet = tweet, Tag = monitoredTag });
 
                 context.Response.StatusCode = 200;

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dapr.Actors.AspNetCore;
 using Dapr.Client;
-using Dapr.Extensions.Configuration;
 using LeaderboardWebAPI.Actors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -39,16 +38,9 @@ namespace LeaderboardWebAPI
                 {
                     webBuilder
                         .UseStartup<Startup>()
-                        .UseActors(actorRuntime =>
+                        .UseActors(options =>
                         {
-                            actorRuntime.ConfigureActorSettings(a =>
-                            {
-                                a.ActorIdleTimeout = TimeSpan.FromMinutes(70);
-                                a.ActorScanInterval = TimeSpan.FromSeconds(35);
-                                a.DrainOngoingCallTimeout = TimeSpan.FromSeconds(35);
-                                a.DrainRebalancedActors = true;
-                            });
-                            actorRuntime.RegisterActor<LeaderboardActor>();
+                            options.RegisterActor<LeaderboardActor>();
                         });
                 });
     }

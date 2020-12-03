@@ -17,14 +17,14 @@ services:
     networks:
       - leaderboard-dapr
   leaderboardwebapi-dapr:
-    image: "daprio/daprd:0.8.0"
+    image: "daprio/daprd:1.0.0-rc.1"
     command: ["./daprd",
      "-app-id", "leaderboardwebapi",
      "-app-port", "80",
      "-metrics-port", "9091",
      "-log-level", "debug",
      "-config", "components/config.yaml",
-     "-placement-address", "placement:50006",
+     "-placement-host-address", "placement:50006",
      "-dapr-grpc-port", "50002",
      "-components-path", "/components"]
     volumes:
@@ -35,7 +35,7 @@ services:
     network_mode: "service:leaderboardwebapi"
 
   placement:
-    image: "daprio/dapr:0.8.0"
+    image: "daprio/dapr:1.0.0-rc.1"
     command: ["./placement", "-port", "50006"]
     ports:
       - "50006:50006"
@@ -74,6 +74,10 @@ services:
       - GF_SMTP_ENABLED=true
       - GF_SMTP_FROM_ADDRESS=alert@retrogamingwebapi.com
       - GF_SMTP_SKIP_VERIFY=true
+      - GF_EXTERNAL_IMAGE_STORAGE_PROVIDER=azure_blob
+      - GF_EXTERNAL_IMAGE_STORAGE_AZURE_BLOB_ACCOUNT_NAME=...
+      - GF_EXTERNAL_IMAGE_STORAGE_AZURE_BLOB_ACCOUNT_KEY=...
+      - GF_EXTERNAL_IMAGE_STORAGE_AZURE_BLOB_CONTAINER_NAME=grafananotifications
     depends_on:
       - prometheus
     ports:
@@ -84,15 +88,15 @@ services:
   ai-forwarder:
     image: "daprio/dapr-localforwarder:latest"
     environment:
-    - APPINSIGHTS_INSTRUMENTATIONKEY=<your-instrumentation-key>
-    - APPINSIGHTS_LIVEMETRICSSTREAMAUTHENTICATIONAPIKEY=<your-api-key>
+    - APPINSIGHTS_INSTRUMENTATIONKEY=...
+    - APPINSIGHTS_LIVEMETRICSSTREAMAUTHENTICATIONAPIKEY=...
     ports:
     - "55678:55678"
     networks:
     - leaderboard-dapr
 
   redis:
-    image: "redis:alpine"
+    image: "redis"
     ports:
       - "6380:6379"
     networks:
@@ -104,7 +108,7 @@ services:
       context: .
       dockerfile: TwitterMonitor/Dockerfile
     ports:
-      - "5200:80"
+      - "5110:80"
       - "50003:50003"
     environment:
       - DAPR_GRPC_PORT=50003
@@ -114,14 +118,14 @@ services:
     networks:
       - leaderboard-dapr
   twittermonitor-dapr:
-    image: "daprio/daprd:0.8.0"
+    image: "daprio/daprd:1.0.0-rc.1"
     command: ["./daprd",
      "-app-id", "twittermonitor",
      "-app-port", "80",
      "-metrics-port", "9092",
      "-log-level", "info",
      "-config", "components/config.yaml",
-     "-placement-address", "placement:50006",
+     "-placement-host-address", "placement:50006",
      "-dapr-grpc-port", "50003",
      "-components-path", "/components"]
     volumes:
