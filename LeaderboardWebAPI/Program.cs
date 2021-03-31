@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Dapr.Actors.AspNetCore;
 using Dapr.Client;
 using LeaderboardWebAPI.Actors;
 using Microsoft.AspNetCore.Hosting;
@@ -37,11 +36,7 @@ namespace LeaderboardWebAPI
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder
-                        .UseStartup<Startup>()
-                        .UseActors(options =>
-                        {
-                            options.RegisterActor<LeaderboardActor>();
-                        });
+                        .UseStartup<Startup>();
                 });
     }
 }

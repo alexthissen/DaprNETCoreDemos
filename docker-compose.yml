@@ -17,7 +17,7 @@ services:
     networks:
       - leaderboard-dapr
   leaderboardwebapi-dapr:
-    image: "daprio/daprd:1.0.0-rc.1"
+    image: "daprio/daprd:1.0.1"
     command: ["./daprd",
      "-app-id", "leaderboardwebapi",
      "-app-port", "80",
@@ -35,7 +35,7 @@ services:
     network_mode: "service:leaderboardwebapi"
 
   placement:
-    image: "daprio/dapr:1.0.0-rc.1"
+    image: "daprio/dapr:1.0.1"
     command: ["./placement", "-port", "50006"]
     ports:
       - "50006:50006"
@@ -118,7 +118,7 @@ services:
     networks:
       - leaderboard-dapr
   twittermonitor-dapr:
-    image: "daprio/daprd:1.0.0-rc.1"
+    image: "daprio/daprd:1.0.1"
     command: ["./daprd",
      "-app-id", "twittermonitor",
      "-app-port", "80",

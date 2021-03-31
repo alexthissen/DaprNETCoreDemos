@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Grpc.Net.Client;
+using LeaderboardWebAPI.Actors;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -36,6 +37,10 @@ namespace LeaderboardWebAPI
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
                 PropertyNameCaseInsensitive = true,
             });
+            services.AddActors(options =>
+            {
+                options.Actors.RegisterActor<LeaderboardActor>();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,8 +63,9 @@ namespace LeaderboardWebAPI
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapSubscribeHandler();
                 endpoints.MapControllers();
+                endpoints.MapSubscribeHandler();
+                endpoints.MapActorsHandlers();
             });
         }
     }

@@ -17,11 +17,12 @@ namespace LeaderboardWebAPI.Actors
         public int Score { get; set; }
     }
 
+    [Actor(TypeName = "LeaderboardActor")]
     public class LeaderboardActor : Actor, ILeaderboardActor
     {
         private readonly int MaxEntries = 10;
 
-        public LeaderboardActor(ActorService service, ActorId actorId): base(service, actorId)
+        public LeaderboardActor(ActorHost host): base(host)
         {
         }
 
